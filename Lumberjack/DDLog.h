@@ -32,7 +32,6 @@
  * This means you can pass it multiple variables just like NSLog.
 **/
 
-
 @class DDLogMessage;
 
 @protocol DDLogger;
@@ -211,7 +210,7 @@ NSString *DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
 
 #define THIS_METHOD NSStringFromSelector(_cmd)
 
-
+#define DDLogHere   DDLogVerbose(@"%@ %@", THIS_FILE, THIS_METHOD)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
