@@ -40,6 +40,12 @@
 #undef DDLogCVerbose
 
 // Now define everything how we want it
+#define PM_LEVEL_FATAL  0
+#define PM_LEVEL_ERROR  1
+#define PM_LEVEL_WARN   2
+#define PM_LEVEL_NOTICE 3
+#define PM_LEVEL_INFO   4
+#define PM_LEVEL_DEBUG  5
 
 #define LOG_FLAG_FATAL   (1 << 0)  // 0...000001
 #define LOG_FLAG_ERROR   (1 << 1)  // 0...000010
@@ -56,61 +62,61 @@
 #define LOG_LEVEL_DEBUG   (LOG_FLAG_DEBUG  | LOG_LEVEL_INFO  ) // 0...111111
 
 
-//#ifdef DEBUG
-static int ddLogLevel = LOG_LEVEL_DEBUG;
-//#else
-//static const int ddLogLevel = LOG_LEVEL_WARN;
-//#endif
+#ifdef DEBUG
+static int pmLogLevel = LOG_LEVEL_DEBUG;
+#else
+static int pmLogLevel = LOG_LEVEL_WARN;
+#endif
 
-#define LOG_FATAL   (ddLogLevel & LOG_FLAG_FATAL )
-#define LOG_ERROR   (ddLogLevel & LOG_FLAG_ERROR )
-#define LOG_WARN    (ddLogLevel & LOG_FLAG_WARN  )
-#define LOG_NOTICE  (ddLogLevel & LOG_FLAG_NOTICE)
-#define LOG_INFO    (ddLogLevel & LOG_FLAG_INFO  )
-#define LOG_DEBUG   (ddLogLevel & LOG_FLAG_DEBUG )
+#pragma unused pmLogLevel
+
+#define LOG_FATAL   (pmLogLevel & LOG_FLAG_FATAL )
+#define LOG_ERROR   (pmLogLevel & LOG_FLAG_ERROR )
+#define LOG_WARN    (pmLogLevel & LOG_FLAG_WARN  )
+#define LOG_NOTICE  (pmLogLevel & LOG_FLAG_NOTICE)
+#define LOG_INFO    (pmLogLevel & LOG_FLAG_INFO  )
+#define LOG_DEBUG   (pmLogLevel & LOG_FLAG_DEBUG )
 
 // OBJ-C Log level by name
-#define DDLogFatal(frmt, ...)    SYNC_LOG_OBJC_MAYBE(ddLogLevel, LOG_FLAG_FATAL,  0, frmt, ##__VA_ARGS__)
-#define DDLogError(frmt, ...)    SYNC_LOG_OBJC_MAYBE(ddLogLevel, LOG_FLAG_ERROR,  0, frmt, ##__VA_ARGS__)
-#define DDLogWarn(frmt, ...)    ASYNC_LOG_OBJC_MAYBE(ddLogLevel, LOG_FLAG_WARN,   0, frmt, ##__VA_ARGS__)
-#define DDLogNotice(frmt, ...)  ASYNC_LOG_OBJC_MAYBE(ddLogLevel, LOG_FLAG_NOTICE, 0, frmt, ##__VA_ARGS__)
-#define DDLogInfo(frmt, ...)    ASYNC_LOG_OBJC_MAYBE(ddLogLevel, LOG_FLAG_INFO,   0, frmt, ##__VA_ARGS__)
-#define DDLogDebug(frmt, ...)   ASYNC_LOG_OBJC_MAYBE(ddLogLevel, LOG_FLAG_DEBUG,  0, frmt, ##__VA_ARGS__)
+#define PMLogFatal(frmt, ...)    SYNC_LOG_OBJC_MAYBE(pmLogLevel, LOG_FLAG_FATAL,  0, frmt, ##__VA_ARGS__)
+#define PMLogError(frmt, ...)    SYNC_LOG_OBJC_MAYBE(pmLogLevel, LOG_FLAG_ERROR,  0, frmt, ##__VA_ARGS__)
+#define PMLogWarn(frmt, ...)    ASYNC_LOG_OBJC_MAYBE(pmLogLevel, LOG_FLAG_WARN,   0, frmt, ##__VA_ARGS__)
+#define PMLogNotice(frmt, ...)  ASYNC_LOG_OBJC_MAYBE(pmLogLevel, LOG_FLAG_NOTICE, 0, frmt, ##__VA_ARGS__)
+#define PMLogInfo(frmt, ...)    ASYNC_LOG_OBJC_MAYBE(pmLogLevel, LOG_FLAG_INFO,   0, frmt, ##__VA_ARGS__)
+#define PMLogDebug(frmt, ...)   ASYNC_LOG_OBJC_MAYBE(pmLogLevel, LOG_FLAG_DEBUG,  0, frmt, ##__VA_ARGS__)
 
 // OBJ-C Log Level by number
-#define DDLog0(frmt, ...) DDLogFatal(frmt, ...)
-#define DDLog1(frmt, ...) DDLogError(frmt, ...)
-#define DDLog2(frmt, ...) DDLogWarn(frmt, ...)
-#define DDLog3(frmt, ...) DDLogNotice(frmt, ...)
-#define DDLog4(frmt, ...) DDLogInfo(frmt, ...)
-#define DDLog5(frmt, ...) DDLogDebug(frmt, ...)
+#define PMLog0(frmt, ...) PMLogFatal(frmt,  ##__VA_ARGS__)
+#define PMLog1(frmt, ...) PMLogError(frmt,  ##__VA_ARGS__)
+#define PMLog2(frmt, ...) PMLogWarn(frmt,  ##__VA_ARGS__)
+#define PMLog3(frmt, ...) PMLogNotice(frmt,  ##__VA_ARGS__)
+#define PMLog4(frmt, ...) PMLogInfo(frmt,  ##__VA_ARGS__)
+#define PMLog5(frmt, ...) PMLogDebug(frmt,  ##__VA_ARGS__)
 
 // Glue number to name
-#define DDLOG_2(level, format, ...) DDLog##level(format, ...)
-#define DDLOG(level, format, ...) DDLOG_2(level, format, ...)
+#define PMLOG_2(level, format, ...) PMLog##level (format, ##__VA_ARGS__)
+#define PMLOG(level, format, ...) PMLOG_2(level, format, ##__VA_ARGS__)
 
-#define DDHEREL(level)   DDLOG(level, @"File:%@ Method:%@", THIS_FILE, THIS_METHOD)
-#define DDHERE DDHEREL(5);
+#define PMHERE PMLogDebug(@"File:%@ Method:%s", THIS_FILE, __FUNCTION__)
 
 // C Log level by name
-#define DDLogCFatal(frmt, ...)   SYNC_LOG_C_MAYBE(ddLogLevel, LOG_FLAG_FATAL,  0, frmt, ##__VA_ARGS__)
-#define DDLogCError(frmt, ...)   SYNC_LOG_C_MAYBE(ddLogLevel, LOG_FLAG_ERROR,  0, frmt, ##__VA_ARGS__)
-#define DDLogCWarn(frmt, ...)   ASYNC_LOG_C_MAYBE(ddLogLevel, LOG_FLAG_WARN,   0, frmt, ##__VA_ARGS__)
-#define DDLogCNotice(frmt, ...) ASYNC_LOG_C_MAYBE(ddLogLevel, LOG_FLAG_NOTICE, 0, frmt, ##__VA_ARGS__)
-#define DDLogCInfo(frmt, ...)   ASYNC_LOG_C_MAYBE(ddLogLevel, LOG_FLAG_INFO,   0, frmt, ##__VA_ARGS__)
-#define DDLogCDebug(frmt, ...)  ASYNC_LOG_C_MAYBE(ddLogLevel, LOG_FLAG_DEBUG,  0, frmt, ##__VA_ARGS__)
+#define PMLogCFatal(frmt, ...)   SYNC_LOG_C_MAYBE(pmLogLevel, LOG_FLAG_FATAL,  0, frmt, ##__VA_ARGS__)
+#define PMLogCError(frmt, ...)   SYNC_LOG_C_MAYBE(pmLogLevel, LOG_FLAG_ERROR,  0, frmt, ##__VA_ARGS__)
+#define PMLogCWarn(frmt, ...)   ASYNC_LOG_C_MAYBE(pmLogLevel, LOG_FLAG_WARN,   0, frmt, ##__VA_ARGS__)
+#define PMLogCNotice(frmt, ...) ASYNC_LOG_C_MAYBE(pmLogLevel, LOG_FLAG_NOTICE, 0, frmt, ##__VA_ARGS__)
+#define PMLogCInfo(frmt, ...)   ASYNC_LOG_C_MAYBE(pmLogLevel, LOG_FLAG_INFO,   0, frmt, ##__VA_ARGS__)
+#define PMLogCDebug(frmt, ...)  ASYNC_LOG_C_MAYBE(pmLogLevel, LOG_FLAG_DEBUG,  0, frmt, ##__VA_ARGS__)
 
 // C Log Level by number
-#define DDLogC0(frmt, ...) DDLogCFatal(frmt, ...)
-#define DDLogC1(frmt, ...) DDLogCError(frmt, ...)
-#define DDLogC2(frmt, ...) DDLogCWarn(frmt, ...)
-#define DDLogC3(frmt, ...) DDLogCNotice(frmt, ...)
-#define DDLogC4(frmt, ...) DDLogCInfo(frmt, ...)
-#define DDLogC5(frmt, ...) DDLogCDebug(frmt, ...)
+#define PMLogC0(frmt, ...) PMLogCFatal(frmt, ##__VA_ARGS__)
+#define PMLogC1(frmt, ...) PMLogCError(frmt, ##__VA_ARGS__)
+#define PMLogC2(frmt, ...) PMLogCWarn(frmt, ##__VA_ARGS__)
+#define PMLogC3(frmt, ...) PMLogCNotice(frmt, ##__VA_ARGS__)
+#define PMLogC4(frmt, ...) PMLogCInfo(frmt, ##__VA_ARGS__)
+#define PMLogC5(frmt, ...) PMLogCDebug(frmt, ##__VA_ARGS__)
 
 // Glue number to name
-#define DDLOGC_2(level, format, ...) DDLogC##level (format, ...)
-#define DDLOGC(level, format, ...) DDLOGC_2(level, format, ...)
+#define PMLOGC_2(level, format, ...) PMLogC##level (format, ##__VA_ARGS__)
+#define PMLOGC(level, format, ...) PMLOGC_2(level, format, ##__VA_ARGS__)
 
-#define DDHERECL(level)   DDLOGC(level, @"%@ %@", THIS_FILE, THIS_METHOD)
-#define DDHEREC DDHERECL(5);
+#define PMHEREC PMLogCDebug(@"File:%@ Method:%s", THIS_FILE, __FUNCTION__)
