@@ -106,6 +106,7 @@ extern int pmLogLevel;
 #define PMLOG(level, format, ...) PMLOG_2(level, format, ##__VA_ARGS__)
 
 #define PMHERE PMLogDebug(@"File:%@ Method:%s", THIS_FILE, __FUNCTION__)
+#define PMSYM(symbol) PMLogDebug(@"%@: ##symbol: %@", __FUNCTION__, symbol)
 
 // C Log level by name
 #define PMLogCFatal(frmt, ...)   SYNC_LOG_C_MAYBE(pmLogLevel, LOG_FLAG_FATAL,  0, frmt, ##__VA_ARGS__)
