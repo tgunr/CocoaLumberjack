@@ -16,12 +16,17 @@
  * Import the header in your implementation file:
  * 
  * #import "DDLog.h"
- * 
+ *
  * Step 2:
+ * Add the desired type of loggers into main or applicationDidFinishLaunching
+ * [DDLog addLogger:[DDASLLogger sharedInstance]];
+ * [DDLog addLogger:[DDTTYLogger sharedInstance]];
+ *
+ * Step 3:
  * Define your logging level in your implementation file:
  * 
  * // Log levels: off, error, warn, info, verbose
- * static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+ * static int ddLogLevel = LOG_LEVEL_VERBOSE;
  * 
  * Step 3:
  * Replace your NSLog statements with DDLog statements according to the severity of the message.
