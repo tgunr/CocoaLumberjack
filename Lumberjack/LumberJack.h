@@ -61,14 +61,7 @@
 #define LOG_LEVEL_INFO    (LOG_FLAG_INFO   | LOG_LEVEL_NOTICE) // 0...011111
 #define LOG_LEVEL_DEBUG   (LOG_FLAG_DEBUG  | LOG_LEVEL_INFO  ) // 0...111111
 
-
-#ifdef DEBUG
-static int pmLogLevel = LOG_LEVEL_DEBUG;
-#else
-static int pmLogLevel = LOG_LEVEL_WARN;
-#endif
-
-#pragma unused pmLogLevel
+extern int pmLogLevel;
 
 #define LOG_FATAL   (pmLogLevel & LOG_FLAG_FATAL )
 #define LOG_ERROR   (pmLogLevel & LOG_FLAG_ERROR )
@@ -76,6 +69,21 @@ static int pmLogLevel = LOG_LEVEL_WARN;
 #define LOG_NOTICE  (pmLogLevel & LOG_FLAG_NOTICE)
 #define LOG_INFO    (pmLogLevel & LOG_FLAG_INFO  )
 #define LOG_DEBUG   (pmLogLevel & LOG_FLAG_DEBUG )
+
+// Redefine DDLog
+#define DDLogFatal(frmt, ...)    SYNC_LOG_OBJC_MAYBE(pmLogLevel, LOG_FLAG_FATAL,  0, frmt, ##__VA_ARGS__)
+#define DDLogError(frmt, ...)    SYNC_LOG_OBJC_MAYBE(pmLogLevel, LOG_FLAG_ERROR,  0, frmt, ##__VA_ARGS__)
+#define DDLogWarn(frmt, ...)    ASYNC_LOG_OBJC_MAYBE(pmLogLevel, LOG_FLAG_WARN,   0, frmt, ##__VA_ARGS__)
+#define DDLogNotice(frmt, ...)  ASYNC_LOG_OBJC_MAYBE(pmLogLevel, LOG_FLAG_NOTICE, 0, frmt, ##__VA_ARGS__)
+#define DDLogInfo(frmt, ...)    ASYNC_LOG_OBJC_MAYBE(pmLogLevel, LOG_FLAG_INFO,   0, frmt, ##__VA_ARGS__)
+#define DDLogDebug(frmt, ...)   ASYNC_LOG_OBJC_MAYBE(pmLogLevel, LOG_FLAG_DEBUG,  0, frmt, ##__VA_ARGS__)
+
+#define DDLogCFatal(frmt, ...)    SYNC_LOG_C_MAYBE(pmLogLevel, LOG_FLAG_FATAL,  0, frmt, ##__VA_ARGS__)
+#define DDLogCError(frmt, ...)    SYNC_LOG_C_MAYBE(pmLogLevel, LOG_FLAG_ERROR,  0, frmt, ##__VA_ARGS__)
+#define DDLogCWarn(frmt, ...)    ASYNC_LOG_C_MAYBE(pmLogLevel, LOG_FLAG_WARN,   0, frmt, ##__VA_ARGS__)
+#define DDLogCNotice(frmt, ...)  ASYNC_LOG_C_MAYBE(pmLogLevel, LOG_FLAG_NOTICE, 0, frmt, ##__VA_ARGS__)
+#define DDLogCInfo(frmt, ...)    ASYNC_LOG_C_MAYBE(pmLogLevel, LOG_FLAG_INFO,   0, frmt, ##__VA_ARGS__)
+#define DDLogCDebug(frmt, ...)   ASYNC_LOG_C_MAYBE(pmLogLevel, LOG_FLAG_DEBUG,  0, frmt, ##__VA_ARGS__)
 
 // OBJ-C Log level by name
 #define PMLogFatal(frmt, ...)    SYNC_LOG_OBJC_MAYBE(pmLogLevel, LOG_FLAG_FATAL,  0, frmt, ##__VA_ARGS__)
