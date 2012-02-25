@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75352B2F14F8614E006B5450 /* PMTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 75352B2D14F8614E006B5450 /* PMTTYLogger.h */; };
+		75352B3014F8614E006B5450 /* PMTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 75352B2D14F8614E006B5450 /* PMTTYLogger.h */; };
+		75352B3114F8614E006B5450 /* PMTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 75352B2E14F8614E006B5450 /* PMTTYLogger.m */; };
+		75352B3214F8614E006B5450 /* PMTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 75352B2E14F8614E006B5450 /* PMTTYLogger.m */; };
 		75B21BE514F590070055DD45 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B21BE414F590070055DD45 /* Cocoa.framework */; };
 		75B21C0414F590520055DD45 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 75B21BF914F590520055DD45 /* DDAbstractDatabaseLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		75B21C0514F590520055DD45 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 75B21BFA14F590520055DD45 /* DDAbstractDatabaseLogger.m */; };
@@ -27,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		75352B2D14F8614E006B5450 /* PMTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMTTYLogger.h; sourceTree = SOURCE_ROOT; };
+		75352B2E14F8614E006B5450 /* PMTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMTTYLogger.m; sourceTree = SOURCE_ROOT; };
 		75B21BE114F590070055DD45 /* LumberJack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LumberJack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75B21BE414F590070055DD45 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		75B21BE714F590070055DD45 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -107,6 +113,8 @@
 		75B21BEA14F590070055DD45 /* LumberJack */ = {
 			isa = PBXGroup;
 			children = (
+				75352B2D14F8614E006B5450 /* PMTTYLogger.h */,
+				75352B2E14F8614E006B5450 /* PMTTYLogger.m */,
 				75B21BF914F590520055DD45 /* DDAbstractDatabaseLogger.h */,
 				75B21BFA14F590520055DD45 /* DDAbstractDatabaseLogger.m */,
 				75B21BFB14F590520055DD45 /* DDASLLogger.h */,
@@ -146,6 +154,7 @@
 				75B21C0614F590520055DD45 /* DDASLLogger.h in Headers */,
 				75B21C0814F590520055DD45 /* DDFileLogger.h in Headers */,
 				75B21C0C14F590520055DD45 /* DDTTYLogger.h in Headers */,
+				75352B2F14F8614E006B5450 /* PMTTYLogger.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +162,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75352B3014F8614E006B5450 /* PMTTYLogger.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +250,7 @@
 				75B21C0914F590520055DD45 /* DDFileLogger.m in Sources */,
 				75B21C0B14F590520055DD45 /* DDLog.m in Sources */,
 				75B21C0D14F590520055DD45 /* DDTTYLogger.m in Sources */,
+				75352B3114F8614E006B5450 /* PMTTYLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +263,7 @@
 				75D4574D14F5A1C6003ECCF0 /* DDFileLogger.m in Sources */,
 				75D4574E14F5A1C6003ECCF0 /* DDLog.m in Sources */,
 				75D4574F14F5A1C6003ECCF0 /* DDTTYLogger.m in Sources */,
+				75352B3214F8614E006B5450 /* PMTTYLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
