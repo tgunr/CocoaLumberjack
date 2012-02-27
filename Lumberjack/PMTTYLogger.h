@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 PolyMicro Systems. All rights reserved.
 //
 #import <Foundation/Foundation.h>
-#import "DDLog.h"
+#import "LumberJack.h"
 #import "DDTTYLogger.h"
 
 @interface PMFormatter : NSObject <DDLogFormatter>

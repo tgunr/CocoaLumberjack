@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LumberJack.h"
 #import "PMTTYLogger.h"
 
 @implementation PMFormatter
@@ -21,6 +20,16 @@
         [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss:SSS"];
     }
     return self;
+}
+
+NSString *PMExtractFileName(const char *filePath, BOOL copy);
+NSString *PMExtractFileName(const char *filePath, BOOL copy) {
+    NSString *path = [NSString stringWithCString:filePath encoding:NSUTF8StringEncoding];
+    path = [path lastPathComponent];
+    if (copy)
+		return [[NSString alloc] stringByAppendingFormat:@"%@", path];
+	else
+		return path;
 }
 
 - (NSString *)formatLogMessage:(DDLogMessage *)logMessage
@@ -41,6 +50,10 @@
     NSString *dateAndTime = [dateFormatter stringFromDate:(logMessage->timestamp)];
     
     NSString *logMsg = logMessage->logMsg;
+    NSString *tail = @":";
+    if ([logMsg length] == 0) {
+        tail = @"";
+    }
     NSString *rString = [NSString stringWithFormat:@"%@ %@ |", logLevel, dateAndTime];
     
     NSInteger context = (NSInteger)logMessage->logContext;
@@ -49,10 +62,10 @@
             rString = logMsg;
             break;
         case 1: 
-            rString = [rString stringByAppendingFormat:@" %s: %@", logMessage->function, logMsg];
+            rString = [rString stringByAppendingFormat:@" %s%@ %@", logMessage->function, tail, logMsg];
             break;
-        case 2: 
-            rString = [rString stringByAppendingFormat:@" %s %s: %@", logMessage->file, logMessage->function, logMsg];
+        case 2:
+            rString = [rString stringByAppendingFormat:@" %@[%u] %s%@ %@", PMExtractFileName(logMessage->file, NO), logMessage->lineNumber, logMessage->function, tail, logMsg];
             break;
         default:
             rString = logMsg;
