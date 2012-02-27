@@ -6,7 +6,7 @@
 #import <mach/host_info.h>
 #import <libkern/OSAtomic.h>
 
-//    static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+int ddLogLevel = 0xFF;
 
 /**
  * Welcome to Cocoa Lumberjack!
