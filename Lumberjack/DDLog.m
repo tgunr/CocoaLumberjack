@@ -6,7 +6,11 @@
 #import <mach/host_info.h>
 #import <libkern/OSAtomic.h>
 
+#ifdef DEBUG
 int ddLogLevel = 0xFF;
+#else
+int ddLogLevel = LOG_LEVEL_ERROR;
+#endif
 
 /**
  * Welcome to Cocoa Lumberjack!
