@@ -12,6 +12,30 @@ int ddLogLevel = 0xFF;
 int ddLogLevel = LOG_LEVEL_ERROR;
 #endif
 
+int				ddLogLevelIndex = 0;
+int             ddLogLevelStack[256];
+
+// PMLOGSetVerbose sets a new debug level
+void setDDLogLevel(int level) 
+{ ddLogLevel = level; }
+
+// PMLOGPushVerbose sets a new debug setting and saves the previous one
+// Use this to reduce debug output inside loops etc.
+void ddLogLevelPush(int level) {
+	ddLogLevelStack[ddLogLevelIndex] = ddLogLevel;
+	ddLogLevelIndex++;
+	if (ddLogLevelIndex > 256)
+		ddLogLevelIndex = 256;
+	ddLogLevel = level;
+}
+
+void ddLogLevelPop(void) {
+	ddLogLevelIndex--;
+	if (ddLogLevelIndex < 0)
+		ddLogLevelIndex = 0;
+	ddLogLevel = ddLogLevelStack[ddLogLevelIndex];
+}
+
 /**
  * Welcome to Cocoa Lumberjack!
  * 

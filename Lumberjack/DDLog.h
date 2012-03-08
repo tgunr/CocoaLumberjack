@@ -37,6 +37,10 @@
  * This means you can pass it multiple variables just like NSLog.
 **/
 
+void setDDLogLevel(int value);
+void ddLogLevelPush(int level);
+void ddLogLevelPop(void);
+
 @class DDLogMessage;
 
 @protocol DDLogger;
