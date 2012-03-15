@@ -1,6 +1,5 @@
 #import "DDTTYLogger.h"
 
-#import <unistd.h>
 #import <sys/uio.h>
 
 /**
@@ -55,7 +54,7 @@ static DDTTYLogger *sharedInstance;
 	
 	if ((self = [super init]))
 	{
-		isaTTY = isatty(STDERR_FILENO);
+		isaTTY = isatty(STDERR_FILENO) == 0 ? NO : YES;
 		
 		if (isaTTY)
 		{

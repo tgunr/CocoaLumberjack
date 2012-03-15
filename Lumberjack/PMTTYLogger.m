@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 PolyMicro Systems. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "PMTTYLogger.h"
 
 @implementation PMFormatter

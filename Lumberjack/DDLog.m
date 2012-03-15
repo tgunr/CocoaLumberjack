@@ -1,10 +1,6 @@
 #import "DDLog.h"
-
 #import <pthread.h>
 #import <objc/runtime.h>
-#import <mach/mach_host.h>
-#import <mach/host_info.h>
-#import <libkern/OSAtomic.h>
 
 #ifdef DEBUG
 int ddLogLevel = 0xFF;
@@ -16,7 +12,7 @@ int				ddLogLevelIndex = 0;
 int             ddLogLevelStack[256];
 
 // PMLOGSetVerbose sets a new debug level
-void setDDLogLevel(int level) 
+void setDDLogLevel(int level)
 { ddLogLevel = level; }
 
 // PMLOGPushVerbose sets a new debug setting and saves the previous one
@@ -395,7 +391,7 @@ static unsigned int numProcessors;
 + (NSArray *)registeredClasses
 {
 	int numClasses, i;
-	
+
 	// We're going to get the list of all registered classes.
 	// The Objective-C runtime library automatically registers all the classes defined in your source code.
 	// 
@@ -418,7 +414,7 @@ static unsigned int numProcessors;
 	
 	// We can now loop through the classes, and test each one to see if it is a DDLogging class.
 	
-	NSMutableArray *result = [NSMutableArray arrayWithCapacity:numClasses];
+	NSMutableArray *result = [NSMutableArray arrayWithCapacity:(NSUInteger) numClasses];
 	
 	for (i = 0; i < numClasses; i++)
 	{
@@ -448,14 +444,8 @@ static unsigned int numProcessors;
 	return result;
 }
 
-+ (int)logLevelForClass:(Class)aClass
-{
-	if ([self isRegisteredClass:aClass])
-	{
-		return [aClass ddLogLevel];
-	}
-	
-	return -1;
++ (int) logLevelForClass:(Class) aClass {
+    return ([self isRegisteredClass:aClass]) ? ([aClass ddLogLevel]) : -1;
 }
 
 + (int)logLevelForClassWithName:(NSString *)aClassName
@@ -465,12 +455,9 @@ static unsigned int numProcessors;
 	return [self logLevelForClass:aClass];
 }
 
-+ (void)setLogLevel:(int)logLevel forClass:(Class)aClass
-{
-	if ([self isRegisteredClass:aClass])
-	{
-		[aClass ddSetLogLevel:logLevel];
-	}
++ (void) setLogLevel:(int) logLevel forClass:(Class) aClass {
+    if ([self isRegisteredClass:aClass])
+        [aClass ddSetLogLevel:logLevel];
 }
 
 + (void)setLogLevel:(int)logLevel forClassWithName:(NSString *)aClassName

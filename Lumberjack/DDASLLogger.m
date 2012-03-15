@@ -1,7 +1,5 @@
 #import "DDASLLogger.h"
 
-#import <libkern/OSAtomic.h>
-
 /**
  * Welcome to Cocoa Lumberjack!
  * 
