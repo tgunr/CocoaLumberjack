@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		752C200815AB4D9500BB62AE /* LumberJackC.h in Headers */ = {isa = PBXBuildFile; fileRef = 752C200615AB4C7C00BB62AE /* LumberJackC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		75352B2F14F8614E006B5450 /* PMTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 75352B2D14F8614E006B5450 /* PMTTYLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		75352B3014F8614E006B5450 /* PMTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 75352B2D14F8614E006B5450 /* PMTTYLogger.h */; };
 		75352B3114F8614E006B5450 /* PMTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 75352B2E14F8614E006B5450 /* PMTTYLogger.m */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		752C200615AB4C7C00BB62AE /* LumberJackC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LumberJackC.h; sourceTree = SOURCE_ROOT; };
 		75352B2D14F8614E006B5450 /* PMTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMTTYLogger.h; sourceTree = SOURCE_ROOT; };
 		75352B2E14F8614E006B5450 /* PMTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMTTYLogger.m; sourceTree = SOURCE_ROOT; };
 		75B21BE114F590070055DD45 /* LumberJack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LumberJack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +128,7 @@
 				75B21C0114F590520055DD45 /* DDTTYLogger.h */,
 				75B21C0214F590520055DD45 /* DDTTYLogger.m */,
 				75B21C0314F590520055DD45 /* LumberJack.h */,
+				752C200615AB4C7C00BB62AE /* LumberJackC.h */,
 				75B21BEB14F590070055DD45 /* Supporting Files */,
 			);
 			path = LumberJack;
@@ -149,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75B21C0E14F590520055DD45 /* LumberJack.h in Headers */,
+				752C200815AB4D9500BB62AE /* LumberJackC.h in Headers */,
 				75B21C0A14F590520055DD45 /* DDLog.h in Headers */,
 				75B21C0414F590520055DD45 /* DDAbstractDatabaseLogger.h in Headers */,
 				75B21C0614F590520055DD45 /* DDASLLogger.h in Headers */,
